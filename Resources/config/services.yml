@@ -1,0 +1,31 @@
+services:
+    jhg.extra.return_url_helper:
+        class: Jhg\ExtraBundle\Helper\ReturnUrlHelper
+        arguments: [@service_container]
+
+    ru:
+        alias: jhg.extra.return_url_helper
+
+    jhg.extra.twig.return_url_extension:
+        class: Jhg\ExtraBundle\Twig\ReturnUrlExtension
+        arguments: [@jhg.extra.return_url_helper]
+        tags:
+            - { name: twig.extension }
+
+    jhg.extra.twig.money_extension:
+        class: Jhg\ExtraBundle\Twig\MoneyExtension
+        arguments: [@translator]
+        tags:
+            - { name: twig.extension }
+
+    jhg.extra.twig.percentage_extension:
+        class: Jhg\ExtraBundle\Twig\PercentageExtension
+        arguments: [@translator]
+        tags:
+            - { name: twig.extension }
+
+    jhg.extra.twig.lipsum_extension:
+        class: Jhg\ExtraBundle\Twig\LipsumExtension
+        arguments: [@translator]
+        tags:
+            - { name: twig.extension }
