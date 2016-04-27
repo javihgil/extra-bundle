@@ -15,11 +15,11 @@
         "mockery/mockery": "0.9.*"
     },
     "require": {
-        "symfony/config": "~2.5",
-        "symfony/form": "~2.5",
-        "symfony/http-foundation": "~2.5",
-        "symfony/http-kernel": "~2.5",
-        "symfony/dependency-injection": "~2.5"
+        "symfony/config": "~2.5|~3.0",
+        "symfony/form": "~2.5|~3.0",
+        "symfony/http-foundation": "~2.5|~3.0",
+        "symfony/http-kernel": "~2.5|~3.0",
+        "symfony/dependency-injection": "~2.5|~3.0"
     },
     "scripts": {
         "test": [
