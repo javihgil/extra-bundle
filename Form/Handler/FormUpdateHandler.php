@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class FormUpdateHandler
  */
-abstract class FormUpdateHandler implements FormHandlerInterface
+class FormUpdateHandler implements FormHandlerInterface
 {
 
     /**

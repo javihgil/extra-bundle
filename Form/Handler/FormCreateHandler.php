@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class FormCreateHandler
  */
-abstract class FormCreateHandler implements FormHandlerInterface
+class FormCreateHandler implements FormHandlerInterface
 {
 
     /**
