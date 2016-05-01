@@ -42,12 +42,9 @@ class FormCreateHandler implements FormHandlerInterface
      */
     public function process(Form $form, Request $request)
     {
-        if (!$request->isMethod('POST')) {
-            return false;
-        }
-        $form->submit($request);
+        $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $this->entityManager->persist($data);
             $this->entityManager->flush();
