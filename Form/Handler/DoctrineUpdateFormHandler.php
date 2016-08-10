@@ -16,22 +16,22 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class FormCreateHandler
+ * Class DoctrineUpdateFormHandler
  */
-class FormCreateHandler implements FormHandlerInterface
+class DoctrineUpdateFormHandler implements FormHandlerInterface
 {
 
     /**
      * @var EntityManagerInterface
      */
-    protected $entityManager;
+    protected $em;
 
     /**
-     * @param EntityManagerInterface $entityManager
+     * @param EntityManagerInterface $em
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->entityManager = $entityManager;
+        $this->em = $em;
     }
 
     /**
@@ -42,12 +42,16 @@ class FormCreateHandler implements FormHandlerInterface
      */
     public function process(Form $form, Request $request)
     {
+        if (!$request->isMethod('POST')) {
+            return false;
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $this->entityManager->persist($data);
-            $this->entityManager->flush();
+            $this->em->persist($data);
+            $this->em->flush();
 
             return true;
         }

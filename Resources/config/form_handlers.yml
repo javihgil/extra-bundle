@@ -1,0 +1,21 @@
+services:
+    jhg_utils.doctrine_entity_create.form_handler:
+        class: Jhg\ExtraBundle\Form\Handler\DoctrineCreateFormHandler
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    jhg_utils.doctrine_entity_update.form_handler:
+        class: Jhg\ExtraBundle\Form\Handler\DoctrineUpdateFormHandler
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    jhg_utils.doctrine_entity_delete.form_handler:
+        class: Jhg\ExtraBundle\Form\Handler\DoctrineDeleteFormHandler
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    doctrine_create_form_handler:
+        alias: jhg_utils.doctrine_entity_create.form_handler
+
+    doctrine_update_form_handler:
+        alias: jhg_utils.doctrine_entity_update.form_handler
+
+    doctrine_delete_form_handler:
+        alias: jhg_utils.doctrine_entity_delete.form_handler

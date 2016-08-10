@@ -39,7 +39,7 @@ class MoneyExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'money' => new \Twig_SimpleFilter('money', [$this, 'money']),
+            'money' => new \Twig_Filter_Function('money', [$this, 'money']),
         );
     }
 

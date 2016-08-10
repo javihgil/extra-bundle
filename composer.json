@@ -1,6 +1,6 @@
 {
     "name": "javihgil/extra-bundle",
-    "description": "Some Symfony extra tools",
+    "description": "Utility services and classes for Symfony projects",
     "type": "bundle",
     "license": "MIT",
     "minimum-stability": "dev",
@@ -11,24 +11,80 @@
         }
     },
     "require-dev": {
+        "javihgil/composer-ci-tools": "1.0.*",
         "phpunit/phpunit": "4.2.*",
-        "mockery/mockery": "0.9.*"
+        "mockery/mockery": "0.9.*",
+        "sensiolabs/security-checker": "~3.0",
+        "hexmedia/yaml-linter": "0.1"
     },
     "require": {
         "symfony/config": "~2.5|~3.0",
         "symfony/form": "~2.5|~3.0",
         "symfony/http-foundation": "~2.5|~3.0",
         "symfony/http-kernel": "~2.5|~3.0",
-        "symfony/dependency-injection": "~2.5|~3.0"
+        "symfony/dependency-injection": "~2.5|~3.0",
+        "twig/twig": "^1.9",
+        "doctrine/orm": "~2.2,>=2.2.3"
     },
-    "scripts": {
-        "test": [
-            "vendor/bin/phpunit"
-        ]
+    "config": {
+        "process-timeout": 0,
+        "bin-dir": "vendor/bin"
     },
     "extra": {
+        "ci-tools": {
+            "global": {
+                "test-results-path": "target/test",
+                "log-format": "  <fg=cyan>> %s</>"
+            },
+            "phpunit": {
+                "bin": "php -d memory_limit=-1 vendor/bin/phpunit",
+                "tasks": {
+                    "test": {
+                        "config": "phpunit.xml"
+                    }
+                }
+            },
+            "git": {
+                "commit-msg-regex": "/^[a-z\\s\\-0-9\\.]{20,}$/i",
+                "commit-msg-error": "The commit message must be at least 20 characters long"
+            }
+        },
         "branch-alias": {
             "dev-master": "1.0-dev"
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Jhg\\ComposerCiTools\\GitHooksInstaller::preCommit",
+            "Jhg\\ComposerCiTools\\GitHooksInstaller::prePush",
+            "Jhg\\ComposerCiTools\\GitHooksInstaller::commitMsg"
+        ],
+        "pre-commit-hook": [
+            "@composer validate",
+            "Jhg\\ComposerCiTools\\Lint::phpLazy",
+            "Jhg\\ComposerCiTools\\Lint::yamlLazy",
+            "Jhg\\ComposerCiTools\\SecurityChecker::check",
+            "Jhg\\ComposerCiTools\\PhpUnit::test"
+        ],
+        "pre-push-hook": [
+            "Jhg\\ComposerCiTools\\Lint::php",
+            "Jhg\\ComposerCiTools\\Lint::yaml",
+            "Jhg\\ComposerCiTools\\SecurityChecker::check",
+            "Jhg\\ComposerCiTools\\PhpUnit::test"
+        ],
+        "commit-msg-hook": [
+            "Jhg\\ComposerCiTools\\Git::commitMsgRegex"
+        ],
+        "clear": [
+            "rm target -Rf"
+        ],
+        "test": [
+            "@composer validate",
+            "@composer install --ansi --no-progress",
+            "Jhg\\ComposerCiTools\\Lint::php",
+            "Jhg\\ComposerCiTools\\Lint::yaml",
+            "Jhg\\ComposerCiTools\\PhpUnit::test",
+            "Jhg\\ComposerCiTools\\SecurityChecker::check"
+        ]
     }
 }

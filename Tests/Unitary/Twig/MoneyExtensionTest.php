@@ -49,7 +49,7 @@ class MoneyExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, sizeof($filters), "getFilters must return 1 element");
 
         $this->assertArrayHasKey('money', $filters, "getFilters must return money");
-        $this->assertTrue($filters['money'] instanceof \Twig_SimpleFilter);
+        $this->assertTrue($filters['money'] instanceof \Twig_Filter_Function);
     }
 
     public function testMoney()

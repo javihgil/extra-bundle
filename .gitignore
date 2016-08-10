@@ -1,4 +1,4 @@
-.idea/
-vendor/
+.idea
+target
+vendor
 composer.lock
-composer.phar

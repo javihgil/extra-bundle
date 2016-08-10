@@ -69,6 +69,8 @@ class FormCreateHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->requestMock->shouldReceive('isMethod')->andReturn(true);
         $this->formMock->shouldReceive('submit');
+        $this->formMock->shouldReceive('handleRequest');
+        $this->formMock->shouldReceive('isSubmitted')->andReturn(true);
 
         // mock method for test non valid form data
         $this->formMock->shouldReceive('isValid')->andReturn(false);
@@ -85,6 +87,8 @@ class FormCreateHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->requestMock->shouldReceive('isMethod')->andReturn(true);
         $this->formMock->shouldReceive('submit');
+        $this->formMock->shouldReceive('handleRequest');
+        $this->formMock->shouldReceive('isSubmitted')->andReturn(true);
         $this->formMock->shouldReceive('isValid')->andReturn(true);
         $this->formMock->shouldReceive('getData');
         $this->entityManagerMock->shouldReceive('persist');

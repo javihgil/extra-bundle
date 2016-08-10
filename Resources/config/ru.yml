@@ -1,0 +1,7 @@
+services:
+    jhg.extra.return_url_helper:
+        class: Jhg\ExtraBundle\Helper\ReturnUrlHelper
+        arguments: ["@service_container"]
+
+    ru:
+        alias: jhg.extra.return_url_helper

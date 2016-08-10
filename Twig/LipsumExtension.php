@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the inquietanz-project package.
+ * This file is part of the extra-bundle package.
  *
  * (c) Javi H. Gil <https://github.com/javihgil>
  *
@@ -13,9 +13,6 @@ namespace Jhg\ExtraBundle\Twig;
 
 /**
  * Class LipsumExtension
- *
- * @package Jhg\ExtraBundle\Twig
- * @author  Javi H. Gil <https://github.com/javihgil>
  */
 class LipsumExtension extends \Twig_Extension
 {
@@ -30,7 +27,7 @@ class LipsumExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'lipsum' => new \Twig_SimpleFunction('lipsum', [$this, 'lipsum']),
+            'lipsum' => new \Twig_Function_Function('lipsum', [$this, 'lipsum']),
         );
     }
 

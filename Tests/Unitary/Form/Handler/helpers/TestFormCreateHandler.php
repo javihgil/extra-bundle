@@ -11,9 +11,9 @@
 
 namespace Unitary\Form\Handler\helpers;
 
-use Jhg\ExtraBundle\Form\Handler\FormCreateHandler;
+use Jhg\ExtraBundle\Form\Handler\DoctrineCreateFormHandler;
 
-class TestFormCreateHandler extends FormCreateHandler
+class TestFormCreateHandler extends DoctrineCreateFormHandler
 {
     // dummy class for test the abstract class
 }

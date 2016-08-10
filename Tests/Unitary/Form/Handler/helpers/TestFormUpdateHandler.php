@@ -11,9 +11,9 @@
 
 namespace Unitary\Form\Handler\helpers;
 
-use Jhg\ExtraBundle\Form\Handler\FormUpdateHandler;
+use Jhg\ExtraBundle\Form\Handler\DoctrineUpdateFormHandler;
 
-class TestFormUpdateHandler extends FormUpdateHandler
+class TestFormUpdateHandler extends DoctrineUpdateFormHandler
 {
     // dummy class for test the abstract class
 }

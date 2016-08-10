@@ -12,7 +12,6 @@
 namespace Jhg\ExtraBundle\Twig;
 
 use Jhg\ExtraBundle\Helper\ReturnUrlHelper;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class ReturnUrlExtension

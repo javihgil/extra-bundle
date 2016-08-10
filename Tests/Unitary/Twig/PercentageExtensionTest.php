@@ -49,7 +49,7 @@ class PercentageExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, sizeof($filters), "getFilters must return 1 element");
 
         $this->assertArrayHasKey('percentage', $filters, "getFilters must return percentage");
-        $this->assertTrue($filters['percentage'] instanceof \Twig_SimpleFilter);
+        $this->assertTrue($filters['percentage'] instanceof \Twig_Filter_Function);
     }
 
     public function testPercentage()

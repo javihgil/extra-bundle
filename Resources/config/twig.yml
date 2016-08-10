@@ -1,31 +1,28 @@
 services:
-    jhg.extra.return_url_helper:
-        class: Jhg\ExtraBundle\Helper\ReturnUrlHelper
-        arguments: [@service_container]
-
-    ru:
-        alias: jhg.extra.return_url_helper
-
     jhg.extra.twig.return_url_extension:
         class: Jhg\ExtraBundle\Twig\ReturnUrlExtension
-        arguments: [@jhg.extra.return_url_helper]
+        arguments: ["@jhg.extra.return_url_helper"]
+        public: false
         tags:
             - { name: twig.extension }
 
     jhg.extra.twig.money_extension:
         class: Jhg\ExtraBundle\Twig\MoneyExtension
-        arguments: [@translator]
+        arguments: ["@translator"]
+        public: false
         tags:
             - { name: twig.extension }
 
     jhg.extra.twig.percentage_extension:
         class: Jhg\ExtraBundle\Twig\PercentageExtension
-        arguments: [@translator]
+        arguments: ["@translator"]
+        public: false
         tags:
             - { name: twig.extension }
 
     jhg.extra.twig.lipsum_extension:
         class: Jhg\ExtraBundle\Twig\LipsumExtension
-        arguments: [@translator]
+        arguments: ["@translator"]
+        public: false
         tags:
             - { name: twig.extension }

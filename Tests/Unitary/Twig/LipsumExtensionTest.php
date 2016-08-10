@@ -49,7 +49,7 @@ class LipsumExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, sizeof($filters), "getFunctions must return 1 element");
 
         $this->assertArrayHasKey('lipsum', $filters, "getFunctions must return percentage");
-        $this->assertTrue($filters['lipsum'] instanceof \Twig_SimpleFunction);
+        $this->assertTrue($filters['lipsum'] instanceof \Twig_Function_Function);
     }
 
     public function lipsumProvider()

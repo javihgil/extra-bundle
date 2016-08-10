@@ -39,7 +39,7 @@ class PercentageExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'percentage' => new \Twig_SimpleFilter('percentage', [$this, 'percentage']),
+            'percentage' => new \Twig_Filter_Function('percentage', [$this, 'percentage']),
         );
     }
 
