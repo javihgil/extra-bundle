@@ -12,6 +12,7 @@
 namespace Jhg\ExtraBundle\Helper;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ReturnUrlHelper
@@ -33,11 +34,30 @@ class ReturnUrlHelper
     }
 
     /**
+     * This method provides compatibility with 2.x and 3.x Symfony versions
+     *
+     * @return null|Request
+     */
+    private function getRequest()
+    {
+        $request = null;
+
+        if ($this->container->has('request_stack')) {
+            $request = $this->container->get('request_stack')->getCurrentRequest();
+        } elseif (method_exists($this->container, 'isScopeActive') && $this->container->isScopeActive('request')) {
+            // BC for SF <2.4
+            $request = $this->container->get('request');
+        }
+
+        return $request;
+    }
+
+    /**
      * @return string
      */
     public function current()
     {
-        return $this->container->get('request')->getRequestUri();
+        return $this->getRequest() ? $this->getRequest()->getRequestUri() : '';
     }
 
     /**
@@ -54,7 +74,7 @@ class ReturnUrlHelper
      */
     public function last($default = '/')
     {
-        if ($ru = $this->container->get('request')->get('ru')) {
+        if ($this->getRequest() && $ru = $this->getRequest()->get('ru')) {
             return base64_decode($ru);
         } else {
             return $default;
@@ -67,7 +87,7 @@ class ReturnUrlHelper
      */
     public function last64($default = '')
     {
-        if ($ru = $this->container->get('request')->get('ru')) {
+        if ($this->getRequest() && $ru = $this->getRequest()->get('ru')) {
             return $ru;
         } else {
             return base64_encode($default);

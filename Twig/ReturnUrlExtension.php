@@ -16,7 +16,7 @@ use Jhg\ExtraBundle\Helper\ReturnUrlHelper;
 /**
  * Class ReturnUrlExtension
  */
-class ReturnUrlExtension extends \Twig_Extension
+class ReturnUrlExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
 
     /**

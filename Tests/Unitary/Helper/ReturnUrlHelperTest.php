@@ -59,7 +59,11 @@ class ReturnUrlHelperTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurrent($request, $expected, $_2, $_3, $_4)
     {
-        $this->containerMock->shouldReceive('get')->andReturn($request);
+        $requestStackMock = m::mock('Symfony\Component\HttpFoundation\RequestStack');
+        $requestStackMock->shouldReceive('getCurrentRequest')->andReturn($request);
+
+        $this->containerMock->shouldReceive('has')->with('request_stack')->andReturn(true);
+        $this->containerMock->shouldReceive('get')->with('request_stack')->andReturn($requestStackMock);
         $returnUrlHelper = new ReturnUrlHelper($this->containerMock);
         $value = $returnUrlHelper->current();
         $this->assertEquals($expected, $value);
@@ -71,7 +75,11 @@ class ReturnUrlHelperTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurrent64($request, $_1, $expected, $_3, $_4)
     {
-        $this->containerMock->shouldReceive('get')->andReturn($request);
+        $requestStackMock = m::mock('Symfony\Component\HttpFoundation\RequestStack');
+        $requestStackMock->shouldReceive('getCurrentRequest')->andReturn($request);
+
+        $this->containerMock->shouldReceive('has')->with('request_stack')->andReturn(true);
+        $this->containerMock->shouldReceive('get')->with('request_stack')->andReturn($requestStackMock);
         $returnUrlHelper = new ReturnUrlHelper($this->containerMock);
         $value = $returnUrlHelper->current64();
         $this->assertEquals($expected, $value);
@@ -82,7 +90,11 @@ class ReturnUrlHelperTest extends \PHPUnit_Framework_TestCase
      */
     public function testLast($request, $_1, $_2, $expected, $_4)
     {
-        $this->containerMock->shouldReceive('get')->andReturn($request);
+        $requestStackMock = m::mock('Symfony\Component\HttpFoundation\RequestStack');
+        $requestStackMock->shouldReceive('getCurrentRequest')->andReturn($request);
+
+        $this->containerMock->shouldReceive('has')->with('request_stack')->andReturn(true);
+        $this->containerMock->shouldReceive('get')->with('request_stack')->andReturn($requestStackMock);
         $returnUrlHelper = new ReturnUrlHelper($this->containerMock);
         $value = $returnUrlHelper->last();
         $this->assertEquals($expected, $value);
@@ -94,7 +106,11 @@ class ReturnUrlHelperTest extends \PHPUnit_Framework_TestCase
      */
     public function testLast64($request, $_1, $_2, $_3, $expected)
     {
-        $this->containerMock->shouldReceive('get')->andReturn($request);
+        $requestStackMock = m::mock('Symfony\Component\HttpFoundation\RequestStack');
+        $requestStackMock->shouldReceive('getCurrentRequest')->andReturn($request);
+
+        $this->containerMock->shouldReceive('has')->with('request_stack')->andReturn(true);
+        $this->containerMock->shouldReceive('get')->with('request_stack')->andReturn($requestStackMock);
         $returnUrlHelper = new ReturnUrlHelper($this->containerMock);
         $value = $returnUrlHelper->last64();
         $this->assertEquals($expected, $value);
